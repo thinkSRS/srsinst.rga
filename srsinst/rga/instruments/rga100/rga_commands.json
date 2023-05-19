@@ -1,0 +1,456 @@
+{
+    "rs": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": 1000, "enable": true},
+         "query": {
+            "enable": true},
+         "description": "RF_Driver @ 128 amu (Peak Position Tuning)", "value": null, "parameter": {
+            "range": [600.0, 1600.0], "type": "float"},
+         "set": {
+            "no_parameter_enable": true, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": true}
+        },
+     "ep": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": true},
+         "description": "PS_ERR Byte Query", "value": null, "parameter": {
+            "range": [0, 0], "type": null},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": false}
+        },
+     "dg": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": 3, "enable": true},
+         "query": {
+            "enable": false},
+         "description": "Degas Ionizer", "value": null, "parameter": {
+            "range": [0, 20], "type": "integer"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": true, "return_type": "status byte", "return_range": [0, 255], "enable": true}
+        },
+     "mo": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": true},
+         "description": "Multiplier Option", "value": null, "parameter": {
+            "range": [0, 0], "type": null},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": false}
+        },
+     "sa": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": 10, "enable": true},
+         "query": {
+            "enable": true},
+         "description": "Steps per amu", "value": null, "parameter": {
+            "range": [10, 25], "type": "integer"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": true}
+        },
+     "mf": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": "300", "enable": true},
+         "query": {
+            "enable": true},
+         "description": "Final Mass", "value": null, "parameter": {
+            "range": [1, 300], "type": "integer"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": true}
+        },
+     "st": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": true},
+         "description": "Total Pressure Sensitivity", "value": null, "parameter": {
+            "range": [0.0, 100.0], "type": "float"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": true}
+        },
+     "di": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": 115, "enable": true},
+         "query": {
+            "enable": true},
+         "description": "DI parameter(Peak Width Tuning)", "value": null, "parameter": {
+            "range": [0, 255], "type": "integer"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": true}
+        },
+     "id": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": true},
+         "description": "Identification Query", "value": null, "parameter": {
+            "range": [0, 0], "type": null},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": false}
+        },
+     "ef": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": true},
+         "description": "FIL_ERR Byte Query", "value": null, "parameter": {
+            "range": [0, 0], "type": null},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": false}
+        },
+     "ce": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": true},
+         "description": "Calibration Enable Query", "value": null, "parameter": {
+            "range": [0, 0], "type": null},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": false}
+        },
+     "fl": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": 1.0, "enable": true},
+         "query": {
+            "enable": true},
+         "description": "Electron Emission Current", "value": null, "parameter": {
+            "range": [0.0, 3.5], "type": "float"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": true, "return_type": "status byte", "return_range": [0, 255], "enable": true}
+        },
+     "ed": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": true},
+         "description": "DET_ERR Byte Query", "value": null, "parameter": {
+            "range": [0, 0], "type": null},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": false}
+        },
+     "er": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": true},
+         "description": "STATUS Byte Query", "value": null, "parameter": {
+            "range": [0, 0], "type": null},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": false}
+        },
+     "sp": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": true},
+         "description": "Partial Pressure Sensitivity", "value": null, "parameter": {
+            "range": [0.0, 10.0], "type": "float"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": true}
+        },
+     "ee": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": 70, "enable": true},
+         "query": {
+            "enable": true},
+         "description": "Electron Energy", "value": null, "parameter": {
+            "range": [25, 105], "type": "integer"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": true, "return_type": "status byte", "return_range": [0, 255], "enable": true}
+        },
+     "eq": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": true},
+         "description": "QMF_ERR Byte Query", "value": null, "parameter": {
+            "range": [0, 0], "type": null},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": false}
+        },
+     "hs": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": 1, "enable": true},
+         "query": {
+            "enable": false},
+         "description": "Histogram Scan Trigger", "value": null, "parameter": {
+            "range": [0, 255], "type": "integer"},
+         "set": {
+            "no_parameter_enable": true, "return_allowed": true, "return_type": "ion currents", "return_range": [-2147483647, 2147483647], "enable": true}
+        },
+     "ap": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": true},
+         "description": "Analog Scan Points", "value": null, "parameter": {
+            "range": [0, 0], "type": null},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": false}
+        },
+     "ri": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": 0, "enable": true},
+         "query": {
+            "enable": true},
+         "description": "RF_Driver @0 amu (Peak Position Tuning)", "value": null, "parameter": {
+            "range": [-86.0, 86.0], "type": "float"},
+         "set": {
+            "no_parameter_enable": true, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": true}
+        },
+     "nf": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": 4, "enable": true},
+         "query": {
+            "enable": true},
+         "description": "Noise Floor", "value": null, "parameter": {
+            "range": [0, 7], "type": "integer"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": true}
+        },
+     "in": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": false},
+         "description": "Initialization", "value": null, "parameter": {
+            "range": [0, 2], "type": "integer"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": true, "return_type": "status byte", "return_range": [0, 255], "enable": true}
+        },
+     "mr": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": false},
+         "description": "Single mass measurement", "value": null, "parameter": {
+            "range": [0, 300], "type": "integer"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": true, "return_type": "ion current", "return_range": [-2147483647, 2147483647], "enable": true}
+        },
+     "ds": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": 0, "enable": true},
+         "query": {
+            "enable": true},
+         "description": "DS parameter(Peak Width Tuning)", "value": null, "parameter": {
+            "range": [-2.55, 2.55], "type": "float"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": true}
+        },
+     "sc": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": 1, "enable": true},
+         "query": {
+            "enable": false},
+         "description": "Analog Scan Trigger", "value": null, "parameter": {
+            "range": [0, 255], "type": "integer"},
+         "set": {
+            "no_parameter_enable": true, "return_allowed": true, "return_type": "ion currents", "return_range": [-2147483647, 2147483647], "enable": true}
+        },
+     "vf": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": 90, "enable": true},
+         "query": {
+            "enable": true},
+         "description": "Focus Plate Voltage", "value": null, "parameter": {
+            "range": [0, 150], "type": "integer"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": true, "return_type": "status byte", "return_range": [0, 255], "enable": true}
+        },
+     "mi": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": 1, "enable": true},
+         "query": {
+            "enable": true},
+         "description": "Initial Mass", "value": null, "parameter": {
+            "range": [1, 300], "type": "integer"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": true}
+        },
+     "cl": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": false},
+         "description": "Calibrate Electrometer", "value": null, "parameter": {
+            "range": [0, 0], "type": null},
+         "set": {
+            "no_parameter_enable": true, "return_allowed": true, "return_type": "status byte", "return_range": [0, 255], "enable": true}
+        },
+     "tp": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": true},
+         "description": "Total Pressure measurement", "value": null, "parameter": {
+            "range": [0, 1], "type": "integer"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": true, "return_type": "ion current", "return_range": [-2147483647, 2147483647], "enable": true}
+        },
+     "ca": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": false},
+         "description": "Calibrate All", "value": null, "parameter": {
+            "range": [0, 0], "type": null},
+         "set": {
+            "no_parameter_enable": true, "return_allowed": true, "return_type": "status byte", "return_range": [0, 255], "enable": true}
+        },
+     "ec": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": true},
+         "description": "RS232_ERR Byte Query", "value": null, "parameter": {
+            "range": [0, 0], "type": null},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": false}
+        },
+     "ie": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": 1, "enable": true},
+         "query": {
+            "enable": true},
+         "description": "Ion Energy", "value": null, "parameter": {
+            "range": [0, 1], "type": "integer"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": true, "return_type": "status byte", "return_range": [0, 255], "enable": true}
+        },
+     "mg": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": true},
+         "description": "CDEM gain storage", "value": null, "parameter": {
+            "range": [0.0, 2000.0], "type": "float"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": true}
+        },
+     "mv": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": true},
+         "description": "CDEM Bias Voltage storage", "value": null, "parameter": {
+            "range": [0, 2490], "type": "integer"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": true}
+        },
+     "hv": {
+         "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": 1400, "enable": true},
+         "query": {
+            "enable": true},
+         "description": "CDEM High Voltage", "value": null, "parameter": {
+            "range": [0, 2490], "type": "integer"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": true, "return_type": "status byte", "return_range": [0, 255], "enable": true}
+        },
+     "ml": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": false},
+         "description": "Mass Lock", "value": null, "parameter": {
+            "range": [0.0, 300.0], "type": "float"},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": true, "return_type": "none", "return_range": [0, 0], "enable": true}
+        },
+     "em": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": true},
+         "description": "CEM_ERR Byte Query", "value": null, "parameter": {
+            "range": [0, 0], "type": null},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": false}
+        },
+     "hp": {
+        "index": {
+            "range": [0, 0], "number": 0},
+         "default": {
+            "value": null, "enable": false},
+         "query": {
+            "enable": true},
+         "description": "Histogram Scan Points", "value": null, "parameter": {
+            "range": [0, 0], "type": null},
+         "set": {
+            "no_parameter_enable": false, "return_allowed": false, "return_type": null, "return_range": [0, 0], "enable": false}}}

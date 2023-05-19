@@ -1,0 +1,38 @@
+
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "srsinst.rga"
+authors = [
+    {name = "Chulhoon Kim"},
+]
+description = "Instrument driver package for Residual Gas Analyzers (RGA) from Stanford Research Systems"
+readme = "README.md"
+requires-python = ">=3.7"
+keywords = ["RGA", "residual gas analyzer", "SRS", "Stanford Research Systems"]
+license = {text = "MIT license"}
+classifiers = [
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Topic :: Scientific/Engineering"
+]
+dependencies = [
+    "numpy", "scipy", "srsgui>=0.2.16",
+]
+dynamic = ["version"]
+
+[tool.setuptools.dynamic]
+version = {attr = "srsinst.rga.__version__"}
+
+[project.optional-dependencies]
+full = ['matplotlib>=3.6.2', 'pyside6<=6.4.3']
+
+[project.scripts]
+rga = "srsinst.rga.__main__:main"

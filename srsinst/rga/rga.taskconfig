@@ -1,0 +1,38 @@
+# Line that starts with '#' is a comment line
+# MyRGA Task list for srsgui
+
+# The name is used for the main window title
+
+Name: My RGA Tasks
+
+
+# Specify Instruments used in the task suite
+# A line that starts with 'inst' adds an instrument to be used in the following tasks
+# an instrument is a subclass derived from Instrument class in 'rga' package
+# The second column is the Python module or package that contains the instrument class.
+# The third column is a instrument class in the module
+# The fourth column is connection parameters.
+# if given, the instrument will be connected using the parameters when the config file is loaded.
+
+inst: rga,      srsinst.rga,    RGA100
+# inst: rga2,   srsinst.rga,    RGA100,    tcpip:172.25.40.37:admin:admin:818
+# inst: rga3,   srsinst.rga,    RGA100,    serial:com3:28800:True
+
+
+# A line that starts with 'task: ' adds a task to the task config file.
+# The first column is the task name that will be used as a dictionary key
+# of the task, displayed in GUI Tak menu for selection, and used in task result data file.
+# The Second column is the Python module that contains the task class with relative path from the Task config file.
+# The third column is a task class  that is a Task subclass in the module.
+
+task: Search LAN for RGAs,         srsinst.rga.tasks.searchlan,                   SearchLanTask
+task: Filament Control,            srsinst.rga.tasks.filamentcontroltask,         FilamentControlTask
+task: CEM Control,                 srsinst.rga.tasks.cemcontroltask,              CEMControlTask
+task: Analog Scan,                 srsinst.rga.tasks.analogscantask,              AnalogScanTask
+task: Histogram Scan,              srsinst.rga.tasks.histogramscantask,           HistogramScanTask
+task: Pressure vs. Time Scan,      srsinst.rga.tasks.pvstscantask,                PvsTScanTask
+task: Derived P vs. T Scan,        srsinst.rga.tasks.derivedpvstscantask,         DerivedPvsTScanTask
+task: Composition analysis scan,   srsinst.rga.tasks.compositionanalysistask,     CompositionAnalysisTask
+task: CEM Gain Tuning,             srsinst.rga.tasks.cemgaintask,                 CEMGainTask
+# task: Peak Tuning,                 srsinst.rga.tasks.peaktuningtask,              PeakTuningTask
+
