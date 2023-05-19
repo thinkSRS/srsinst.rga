@@ -1,3 +1,7 @@
+##! 
+##! Coptright(c) 2022, 2023 Stanford Research Systems, All right reserved
+##! Subject to the MIT License
+##! 
 
 """
 RGA100 remote commands allow no space between a set command and the following parameter.

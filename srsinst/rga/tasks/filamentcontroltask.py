@@ -1,3 +1,7 @@
+##! 
+##! Coptright(c) 2022, 2023 Stanford Research Systems, All right reserved
+##! Subject to the MIT License
+##! 
 
 from srsgui import Task
 from srsgui.task.inputs import FloatInput, InstrumentInput
