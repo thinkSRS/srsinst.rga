@@ -3,10 +3,6 @@
 ##! Subject to the MIT License
 ##! 
 
-#
-# :copyright: 2022  Stanford Research Systems.
-# :license: MIT, see LICENSE for more details.
-#
 
 """
 Module contains the main class for operation of SRS RGA100 series
@@ -278,3 +274,4 @@ class RGA100(Instrument):
         return error_status
 
     allow_run_button = [reset, calibrate_all, calibrate_electrometer]
+
