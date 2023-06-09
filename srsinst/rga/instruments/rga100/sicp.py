@@ -7,7 +7,7 @@
 SRS Internet Configuration Protocol (SICP) class
 
 The RGA120 series and RGA Ethernet Adapter (REA) use the IP configuration over UDP broadcasting, SRS IP Configuration protocol (SICP). When a search
-packet is broadcasted, all SICP enabled devices on the Local Area Network (LAN)
+packet is broadcast, all SICP enabled devices on the Local Area Network (LAN)
 will respond with a packet. From those packets, you can find available devices
 on the network.
 

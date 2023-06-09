@@ -24,7 +24,7 @@ classifiers = [
         "Topic :: Scientific/Engineering"
 ]
 dependencies = [
-    "numpy", "scipy", "srsgui>=0.2.16",
+    "numpy", "scipy", "srsgui >=0.3.2",
 ]
 dynamic = ["version"]
 
@@ -32,7 +32,9 @@ dynamic = ["version"]
 version = {attr = "srsinst.rga.__version__"}
 
 [project.optional-dependencies]
-full = ['matplotlib>=3.6.2', 'pyside6<=6.4.3']
+full = ['matplotlib >= 3.6.2', 'pyside6 <=6.4.3, >=6.5.1']
+# For Dependency specification, Refer to PEP 631
 
 [project.scripts]
 rga = "srsinst.rga.__main__:main"
+

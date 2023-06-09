@@ -14,6 +14,18 @@ from .commands import FloatNSCommand, BoolSetNSCommand,\
 from .errors import query_errors, fetch_error_descriptions
 
 
+class Defaults:
+    """
+    SRS RGA default values after reset
+    """
+    ElectronEnergy = 70
+    IonEnergy = 12
+    FocusVoltage = 90
+    InitialMass = 1
+    ScanSpeed = 4
+    StepsPerAmu = 10
+
+
 class Ionizer(Component):
     electron_energy = RgaIntCommand('EE', 'eV', 25, 105, 1, 70)
     ion_energy = RgaIonEnergyCommand('IE', 'eV', 8, 12, 4, 12)
@@ -42,7 +54,10 @@ class Ionizer(Component):
 
         return self.electron_energy, self.ion_energy, self.focus_voltage
 
-    def set_parameters(self, electron_energy, ion_energy, focus_voltage):
+    def set_parameters(self,
+                       electron_energy=Defaults.ElectronEnergy,
+                       ion_energy=Defaults.IonEnergy,
+                       focus_voltage=Defaults.FocusVoltage):
         """
         Set electron energy, ion energy and focus voltage
 

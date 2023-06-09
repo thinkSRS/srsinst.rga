@@ -15,6 +15,25 @@ logger = logging.getLogger(__name__)
 
 
 class AnalogScanPlot(BaseScanPlot):
+    """
+    Class to manage an analog scan plot with data generated from the parent task
+
+    parameters
+    -----------
+
+        parent: Task
+            It uses resources from the parent task
+
+        scan: Scans
+            an instance of Scans class in an instance of RGA100 class
+
+        plot_name: str
+            name of the plot used as title of the plot and name of the dict for scan data saving
+
+        save_to_file: bool
+            to create a table in the data file
+    """
+
     def __init__(self, parent: Task, ax: Axes, scan: Scans, plot_name='', save_to_file=True):
         if not issubclass(type(parent), Task):
             raise TypeError('Invalid parent {} is not a Task subclass'.format(type(parent)))
@@ -40,6 +59,7 @@ class AnalogScanPlot(BaseScanPlot):
         self.reset()
 
     def reset(self):
+
         self.first_scan = True
         self.initial_mass = self.scan.initial_mass
         self.final_mass = self.scan.final_mass

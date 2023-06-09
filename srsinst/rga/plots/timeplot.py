@@ -14,10 +14,38 @@ logger = logging.getLogger(__name__)
 
 
 class TimePlot:
+    """
+    Class to manage a plot for multiple time-series data generated in the parent task
+
+    parameters
+    -----------
+
+        parent: Task
+            It uses resources from the parent task
+
+        ax: Axes
+            Matplotlib Axes on which it makes a plot
+
+        data_names: tuple or list
+            list of names of time series data. It specifies the number of data sets, too.
+
+        save_to_file: bool
+            Allow To create a table in the data file
+
+        use_datetime: bool
+            To use datetime format for x axis, otherwise it uses the elapsed time in seconds
+
+        plot_options: list of dict
+            each element of the list with the matching element in data_names
+            will be passed to Matplotlib Axes.plot as **kwarg, if exists.
+    """
+
     def __init__(self, parent: Task, ax: Axes, plot_name='', data_names=('Y',), save_to_file=True,
                  use_datetime=True, plot_options=None):
+
         if plot_options is None:
-            plot_options = {}
+            plot_options = []
+
         if not issubclass(type(parent), Task):
             raise TypeError('Invalid parent {} is not a Task subclass'.format(type(parent)))
         # if type(ax) is not Axes or AxesSubplot:
@@ -55,9 +83,16 @@ class TimePlot:
         else:
             self.time = np.zeros(self._data_buffer_size, dtype=np.float64)
 
-        for key in self.data_keys:
+        for index, key in enumerate(self.data_keys):
+            try:
+                options = plot_options[index]
+                if type(options) is not dict:
+                    raise TypeError
+            except (IndexError, TypeError):
+                options = {}
+
             self.data[key] = np.zeros(self._data_buffer_size)
-            self.lines[key], = self.ax.plot([1.0], [1.0], label=key)
+            self.lines[key], = self.ax.plot([1.0], [1.0], label=key, **options)
 
         # significant digits in a number in text
         self.round_float_resolution = 4
@@ -89,6 +124,7 @@ class TimePlot:
     def on_pick(self, event):
         """
         Toggle a line from the line corresponding in the legend
+
         https://matplotlib.org/stable/gallery/event_handling/legend_picking.html
         """
         legline = event.artist

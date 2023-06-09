@@ -173,6 +173,7 @@ class CEMGainTask(Task):
         if error <= 0.10:
             self.rga.cem.voltage = hv_to_set
             self.rga.cem.stored_gain = round(measured_gain, 1)
+            self.rga.cem.stored_voltage = round(hv_to_set)
             self.set_task_passed(True)
             self.add_details(f'Gain at {hv_to_set:.0f} V : {measured_gain:.0f}')
         else:

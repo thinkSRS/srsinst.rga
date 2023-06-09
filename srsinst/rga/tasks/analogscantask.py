@@ -37,6 +37,10 @@ class AnalogScanTask(Task):
         # Get values to use for task  from input_parameters in GUI
         self.params = self.get_all_input_parameters()
 
+        # Get the instrument to use
+        self.rga = get_rga(self, self.params[self.InstrumentName])
+        self.id_string = self.rga.status.id_string
+
         # Get logger to use
         self.logger = self.get_logger(__name__)
 
@@ -54,14 +58,11 @@ class AnalogScanTask(Task):
             self.plot.set_conversion_factor(self.conversion_factor, 'Torr')
 
     def init_scan(self):
-        # Get the instrument to use
-        self.rga = get_rga(self, self.params[self.InstrumentName])
-        self.id_string = self.rga.status.id_string
-
         emission_current = self.rga.ionizer.emission_current
         cem_voltage = self.rga.cem.voltage
 
         self.logger.info('Emission current: {:.2f} mA CEM HV: {} V'.format(emission_current, cem_voltage))
+
         self.rga.scan.set_parameters(self.params[self.StartMass],
                                      self.params[self.StopMass],
                                      self.params[self.ScanSpeed],

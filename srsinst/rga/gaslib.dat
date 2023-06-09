@@ -1,16 +1,17 @@
 
 # Gas Library for composition analysis
+
 # Fragmentation ratio of a gas in this library is just for reference.
-# The real ratio obtained from you mass spectrometer may be different.
+# The real ratio obtained from your mass spectrometer may be different.
 # Usually the higher mass, the lower intensity than the ones on this library.
 # Adjust the peak intensities in the library to fit spectra you acquire,
-# if you know what you are doing.
+# if you know what you are doing (Make a backup before changing the values in the library).
 
 # Adjust the sensitivity factor, if you know the real partial pressure of the gas,
 # to match the principal peak intensity of the gas to the partial pressure of the gas
 
-# Reduction ratio is for UGA system which samples atmospheric pressure gas.
-# sampling partial pressure is reduced to the vacuum chamber partial pressure to operate
+# Reduction ratio is for UGA systems which samples gases in the atmospheric pressure.
+# The sampling partial pressure is reduced to the vacuum chamber partial pressure to operate
 # the mass spectrometer safely.
 
 # Each gas consists of 3 lines

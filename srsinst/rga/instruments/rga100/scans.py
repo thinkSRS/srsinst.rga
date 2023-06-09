@@ -11,13 +11,15 @@ from srsgui.inst.component import Component
 from srsgui.inst.commands import IntGetCommand
 
 from .commands import IntNSCommand
+from .components import Defaults
 
 
 class Scans(Component):
+    """
+    Component for scan setup and data acquisition for RGA100 class
+    """
+
     MaxMass = 100
-    """
-    Component for scan setup and data acquisition from SRS RGAs
-    """
 
     initial_mass = IntNSCommand('MI', 'AMU', 1, MaxMass, 1, 1)
     final_mass = IntNSCommand('MF', 'AMU', 1, MaxMass, 1, MaxMass)
@@ -113,7 +115,11 @@ class Scans(Component):
         """
         return self.initial_mass, self.final_mass, self.speed, self.resolution
 
-    def set_parameters(self, initial_mass=1, final_mass=65, scan_speed=4, steps_per_amu=10):
+    def set_parameters(self,
+                       initial_mass=Defaults.InitialMass,
+                       final_mass=65,
+                       scan_speed=Defaults.ScanSpeed,
+                       steps_per_amu=Defaults.StepsPerAmu):
         """
         Set scan parameters
 
@@ -133,6 +139,7 @@ class Scans(Component):
         self.final_mass = self.get_max_mass()
         self.initial_mass = initial_mass
         self.final_mass = final_mass
+        temp = self.final_mass  # To add a pause
         self.speed = scan_speed
         self.resolution = steps_per_amu
 

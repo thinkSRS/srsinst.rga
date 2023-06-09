@@ -17,18 +17,7 @@ from srsgui import FindListInput, Ip4Input, StringInput, PasswordInput, IntegerI
 
 from .scans import Scans, Scans200, Scans300
 from .components import QMF, Ionizer, Filament, CEM, Pressure, Status
-
-
-class Defaults:
-    """
-    SRS RGA default values after reset
-    """
-    ElectronEnergy = 70
-    IonEnergy = 12
-    FocusVoltage = 90
-    InitialMass = 1
-    ScanSpeed = 4
-    StepsPerAmu = 10
+from srsinst.rga.version import VERSION
 
 
 class RGA100(Instrument):
@@ -55,16 +44,16 @@ class RGA100(Instrument):
         # if Ethernet connection is used,
         # r1 = RGA100('tcpip', '192.168.1.100', 'userid', 'password')
 
-        r1.set_emission_current(1.0)
-        r1.set_scan_parameters()
+        r1.filament.turn_on()
+        r1.set_scan_parameters() # Set to defaults
 
-        xs = r1.get_mass_axis()
-        ys = r1.get_analog_scan()
+        xs = r1.scan.get_mass_axis()
+        ys = r1.scan.get_analog_scan()
 
         for x, y in zip(xs, ys):
             print(x, y)
 
-        r1.set_emission_current(0.0)
+        r1.filament.turn_off()
         r1.disconnect()
 
     """
@@ -89,6 +78,8 @@ class RGA100(Instrument):
             }
         ],
     ]
+
+    __version__ = VERSION
 
     def __init__(self, interface_type=None, *args):
 
@@ -118,9 +109,9 @@ class RGA100(Instrument):
             port : string
                 serial port,  such as 'COM3' or '/dev/ttyUSB0'
             baud_rate : int, optional
-                baud rate of the serial port, default is 114200, and SRS RGA uses 28800.
+                baud rate of the serial port, the Instrument class default is 114200, but RGA100 uses **28800** only.
             hardware_flow_control: bool, optional
-                RTS/CTS setting. The default is False, SRS RGA requires **True**.
+                RTS/CTS setting. The Instrument class default is False, however, RGA100 requires **True**.
 
         If interface_type is 'tcpip',
 
@@ -135,7 +126,7 @@ class RGA100(Instrument):
             password : str
                 password for login.
             port : int, optional
-                TCP port number. The default is 818, which SRS RGA uses
+                TCP port number. The default is 818.
 
         """
         super().connect(interface_type, *args)
@@ -144,7 +135,15 @@ class RGA100(Instrument):
             self.comm._serial.rtscts = True
 
     def check_id(self):
+        """
+        Check if the connected instrument returns the right ID string
+        and adjust the maximum mass depending on the ID string.
 
+        returns
+        --------
+            tuple
+                (model_name, serial_number, firmware_version)
+        """
         self._m_max = 100
         if not self.is_connected():
             return None, None, None
@@ -174,15 +173,15 @@ class RGA100(Instrument):
 
         if self._m_max >= 300:
             self._m_max = 300
-            if type(self.scan) is not Scans300:
+            if not isinstance(self.scan, Scans300):
                 self.scan = Scans300(self)
         elif self._m_max >= 200:
             self._m_max = 200
-            if type(self.scan) is not Scans200:
+            if not isinstance(self.scan, Scans200):
                 self.scan = Scans200(self)
         elif self._m_max >= 100:
             self._m_max = 100
-            if type(self.scan) is not Scans:
+            if not isinstance(self.scan, Scans):
                 self.scan = Scans(self)
         return self._model_name, self._serial_number, self._firmware_version
 

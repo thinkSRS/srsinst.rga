@@ -5,7 +5,6 @@
 
 Name: RGA Tasks
 
-
 # Specify Instruments used in the task suite
 # A line that starts with 'inst' adds an instrument to be used in the following tasks.
 # An instrument is a subclass derived from Instrument class in 'srsgui' package

@@ -4,30 +4,35 @@
 [Stanford Research Systems (SRS) Residual Gas Analyzers (RGA)](https://thinksrs.com/products/rga.html).
 It also provides tasks running in GUI environment based on 
 [srsgui](https://thinksrs.github.io/srsgui/).  
-To operate SRS RGA with this package safely, you need to be familiar with SRS RGA. 
+To operate an SRS RGA with this package safely, you need to be familiar with SRS RGAs. 
 For detailed information, refer to the 
 [manual](https://thinksrs.com/downloads/pdfs/manuals/RGAm.pdf).
 
 ![screenshot](https://github.com/thinkSRS/srsinst.rga/blob/main/docs/_static/image/derived-pvst-plot-screenshot.png " ")
 
 ## Installation
-You need a working Python with `pip` (Python package installer) installed. If you don't,
-[install Python 3](https://realpython.com/installing-python/) to your system.
-
-To install `srsinst.rga` as an instrument driver only, use Python package installer `pip` 
-from the command line.
-
-    python -m pip install srsinst.rga
+You need a working Python version 3.7 or later with `pip` (Python package installer) installed. 
+If you don't, [install Python 3](https://realpython.com/installing-python/) to your system.
 
 To use its full GUI application, create a virtual environment, if necessary,
-and install with *[full]* option:
+and rub Python package installer `pip` with *[full]* option from the command prompt.
 
-    # To create a simple virtual environment (Optional)
+    # To create a simple virtual environment (Optional) 
+    # The activate command may differ depending on your computer operating systems.
+    # Following is for Windows.
+
     python -m venv venv
     venv\scripts\activate
 
-    # To install full GUI application 
+    # To install full GUI application
+
     python -m pip install srsinst.rga[full]
+
+
+To install `srsinst.rga` as an instrument driver only, install WITHOUT the *[full]* option. 
+Installation will be faster, because it does NOT install GUI related packages.
+
+    python -m pip install srsinst.rga
 
 
 ## Run `srsinst.rga` as GUI application

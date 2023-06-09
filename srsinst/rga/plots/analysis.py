@@ -86,7 +86,7 @@ def calculate_baseline(y, ratio=1e-6, lam=1e4, niter=20, full_output=False):
 
 def get_peak_from_analog_scan(x, y, mass, fit=False):
     """
-    Calculate a peak intensity from an analog scan spectrum
+    Calculate the intensity of a peak in an analog scan spectrum
 
     Parameters
     -----------

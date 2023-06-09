@@ -12,6 +12,11 @@ logger = logging.getLogger(__name__)
 
 
 class BaseScanPlot:
+    """
+    Base class for scan plots
+
+    """
+
     def __init__(self, parent: Task, ax: Axes, plot_name='', save_to_file=False):
         self.type = self.__class__.__name__
         self.parent = parent

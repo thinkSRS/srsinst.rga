@@ -9,16 +9,31 @@ from srsinst.rga import SICP
 
 
 class SearchLanTask(Task):
-    """Search for RGAs on the local area network (LAN) using SICP.
-It may not work if a computer firewall blocks UDP port 818 used for broadcast.
+    """
+Search for RGAs on the local area network (LAN) using :mod:`SICP<srsinst.rga.instruments.rga100.sicp>`.
+
+The information on the all RGAs found displayed in the console with the display option.
+Available RGAs are displayed in the task result panel.
+
+It does not ot work if the computer firewall blocks communication on the UDP port 818 used for broadcast.
+
+    parameters
+    -----------
+
+        display option:
+            The format of output display in the console: Short or Full
+
     """
 
     # Input parameter name
     DisplayOption = 'display option'
 
+    OptionShort = 'Short'
+    OptionFull = 'Full'
+
     # input_parameters values are used to change interactively from GUI
     input_parameters = {
-        DisplayOption: ListInput(['Short', 'Full']),
+        DisplayOption: ListInput([OptionShort, OptionFull]),
     }
 
     def setup(self):
@@ -40,8 +55,9 @@ It may not work if a computer firewall blocks UDP port 818 used for broadcast.
 
         self.display_result('\nAvailable RGAs')
         self.display_result('================')
+        print('Option: {}'.format(self.params[self.DisplayOption]))
         for p in sicp.packet_list:
-            if self.params[self.DisplayOption] == 0:
+            if self.params[self.DisplayOption] == self.OptionShort:
                 self.logger.info('Name: {:20s}, SN: {}, IP: {}, Status: {}'
                                  .format(p.device_name, p.serial_number,
                                          p.convert_to_ip_format(p.ip_address),
