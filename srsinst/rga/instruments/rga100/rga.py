@@ -18,7 +18,6 @@ from srsgui import FindListInput, Ip4Input, StringInput, PasswordInput, IntegerI
 from .scans import Scans, Scans200, Scans300
 from .components import QMF, Ionizer, Filament, CEM, Pressure, Status
 
-from ... import __version__ as version  # Global version number 
 
 class RGA100(Instrument):
     """
@@ -78,8 +77,6 @@ class RGA100(Instrument):
             }
         ],
     ]
-
-    __version__ = version
 
     def __init__(self, interface_type=None, *args):
 
