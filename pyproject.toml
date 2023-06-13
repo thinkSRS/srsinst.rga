@@ -33,7 +33,7 @@ version = {attr = "srsinst.rga.__version__"}
 
 [project.optional-dependencies]
 full = ['matplotlib >= 3.6.2', 'pyside6 <=6.4.3, >=6.5.1']
-docs = ['matplotlib', 'pyside6', 'numpy', 'scipy', 'srsgui', 'sphinx>=5', 'sphinx-rtd-theme>=1']
+docs = ['matplotlib', 'pyside6', 'sphinx>=5', 'sphinx-rtd-theme>=1']
 # For Dependency specification, Refer to PEP 631
 
 [project.urls]
