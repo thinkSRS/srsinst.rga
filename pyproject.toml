@@ -24,7 +24,7 @@ classifiers = [
         "Topic :: Scientific/Engineering"
 ]
 dependencies = [
-    "numpy", "scipy", "srsgui >=0.3.2",
+    "numpy", "scipy", "srsgui >=0.3.2", "srsinst"
 ]
 dynamic = ["version"]
 
