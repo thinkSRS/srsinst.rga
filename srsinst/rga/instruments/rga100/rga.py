@@ -79,7 +79,6 @@ class RGA100(Instrument):
     ]
 
     def __init__(self, interface_type=None, *args):
-
         super().__init__(interface_type, *args)
         self.set_term_char(b'\r')
         self._m_max = Scans.MaxMass

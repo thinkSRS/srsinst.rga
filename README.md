@@ -8,7 +8,7 @@ To operate an SRS RGA with this package safely, you need to be familiar with SRS
 For detailed information, refer to the 
 [manual](https://thinksrs.com/downloads/pdfs/manuals/RGAm.pdf).
 
-![screenshot](https://github.com/thinkSRS/srsinst.rga/blob/main/docs/_static/image/comp-analysis-screenshot.png " ")
+![screenshot](https://thinksrs.github.io/srsinst.rga/_images/comp-analysis-screenshot.png " ")
 
 ## Installation
 You need a working Python version 3.7 or later with `pip` (Python package installer) installed. 
