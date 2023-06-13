@@ -35,6 +35,11 @@ version = {attr = "srsinst.rga.__version__"}
 full = ['matplotlib >= 3.6.2', 'pyside6 <=6.4.3, >=6.5.1']
 # For Dependency specification, Refer to PEP 631
 
+[project.urls]
+homepage = "https://github.com/thinkSRS/srsinst.rga"
+repository = "https://github.com/thinkSRS/srsinst.rga.git"
+documentation = "https://thinksrs.github.io/srsinst.rga"
+
 [project.scripts]
 rga = "srsinst.rga.__main__:main"
 

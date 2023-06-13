@@ -8,11 +8,11 @@ To operate an SRS RGA with this package safely, you need to be familiar with SRS
 For detailed information, refer to the 
 [manual](https://thinksrs.com/downloads/pdfs/manuals/RGAm.pdf).
 
-![screenshot](https://github.com/thinkSRS/srsinst.rga/blob/main/docs/_static/image/derived-pvst-plot-screenshot.png " ")
+![screenshot](https://github.com/thinkSRS/srsinst.rga/blob/main/docs/_static/image/comp-analysis-screenshot.png " ")
 
 ## Installation
 You need a working Python version 3.7 or later with `pip` (Python package installer) installed. 
-If you don't, [install Python 3](https://realpython.com/installing-python/) to your system.
+If you don't, [install Python 3](https://www.python.org/) to your system.
 
 To use its full GUI application, create a virtual environment, if necessary,
 and rub Python package installer `pip` with *[full]* option from the command prompt.
