@@ -6,6 +6,6 @@ from .plots.analogscanplot    import AnalogScanPlot
 from .plots.histogramscanplot import HistogramScanPlot
 from .plots.timeplot import TimePlot
 
-__version__ = "0.3.0"  # Global version number
+__version__ = "0.3.3"  # Global version number
 
 

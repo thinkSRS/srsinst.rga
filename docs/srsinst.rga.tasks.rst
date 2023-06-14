@@ -33,7 +33,7 @@ srsinst.rga.tasks.filamentcontroltask module
 
 .. automodule:: srsinst.rga.tasks.filamentcontroltask
    :members:
-   :undoc-members:
+   :no-undoc-members:
    :show-inheritance:
    :no-inherited-members:
 
