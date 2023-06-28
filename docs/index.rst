@@ -8,7 +8,8 @@
 
 ``srsinst.rga`` is a `Python package <package_>`_ to control and acquire data from
 a `Stanford Research Systems (SRS) Residual Gas Analyzer (RGA) <rga100_>`_,
-using the `srsgui`_  package as a base instrument driver and a graphic user interface (GUI).
+using the `srsgui`_  package as a base instrument driver as well as a graphic user interface (GUI)
+application.
 
     ..  figure:: ./_static/image/comp-analysis-screenshot.png
         :align: center

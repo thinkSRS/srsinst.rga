@@ -4,9 +4,9 @@
 [Stanford Research Systems (SRS) Residual Gas Analyzers (RGA)](https://thinksrs.com/products/rga.html).
 It also provides tasks running in GUI environment based on 
 [srsgui](https://thinksrs.github.io/srsgui/).  
-To operate an SRS RGA with this package safely, you need to be familiar with SRS RGAs. 
-For detailed information, refer to the 
-[manual](https://thinksrs.com/downloads/pdfs/manuals/RGAm.pdf).
+For safe operation of an SRS RGA with this package, familiarize yourself with the RGA
+[manual](https://thinksrs.com/downloads/pdfs/manuals/RGAm.pdf) and
+the `srsinst.rga` [documentation](https://thinksrs.github.io/srsinst.rga/).
 
 ![screenshot](https://thinksrs.github.io/srsinst.rga/_images/comp-analysis-screenshot.png " ")
 
@@ -15,7 +15,7 @@ You need a working Python version 3.7 or later with `pip` (Python package instal
 If you don't, [install Python 3](https://www.python.org/) to your system.
 
 To use its full GUI application, create a virtual environment, if necessary,
-and rub Python package installer `pip` with *[full]* option from the command prompt.
+and run Python package installer `pip` with *[full]* option from the command prompt.
 
     # To create a simple virtual environment (Optional) 
     # The activate command may differ depending on your computer operating systems.
