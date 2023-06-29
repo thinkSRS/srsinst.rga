@@ -15,14 +15,10 @@ Search for RGAs on the local area network (LAN) using :mod:`SICP<srsinst.rga.ins
 The information on the all RGAs found displayed in the console with the display option.
 Available RGAs are displayed in the task result panel.
 
-It does not ot work if the computer firewall blocks communication on the UDP port 818 used for broadcast.
+It does not work if the computer firewall blocks communication on the UDP port 818 used for broadcast.
 
-    parameters
-    -----------
-
-        display option:
-            The format of output display in the console: Short or Full
-
+    display option:
+        The format of output display in the console: Short or Full
     """
 
     # Input parameter name

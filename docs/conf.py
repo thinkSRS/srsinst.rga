@@ -11,7 +11,7 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('/PyPI/instrument_library/rga100/srsinst/rga'))
+sys.path.insert(0, os.path.abspath('../srsinst/rga'))
 
 from srsinst.rga import __version__
 
