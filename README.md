@@ -47,9 +47,9 @@ If not,
 
 It will start the GUI application.
 
-Connect to an RGA from the Instruments menu.
-Select a task from the Task menu.
-Press the green arrow to run the selected task. 
+- Connect to an RGA from the Instruments menu.
+- Select a task from the Task menu.
+- Press the green arrow to run the selected task. 
 
 You can write your own task or modify an existing one and run it from the application.
 Refer to [srsgui](https://thinksrs.github.io/srsgui/) documentation for details.

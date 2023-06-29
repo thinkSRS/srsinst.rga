@@ -98,7 +98,7 @@ defined in the configuration file).
 Capture dock widget
 --------------------
 Another way to interact with an RGA is through the capture dock widget. You can open or bring
-the capture dock widget to the top by select the "rga-Capture" menu item from the menu/Docks.
+the capture dock widget to the top by select the **rga-Capture** menu item from the menu/Docks.
 Pressing the Capture button will query all the commands in the class, and update the display them
 in the tree structure. Double-clicking on a value allow you to change the value.
 
@@ -106,11 +106,20 @@ Enabling *Show method* option will display class methods associated with the com
 Some simple methods without a return value can have the run button.
 Pressing the run button the methods can run from the capture dock widget.
 
+    ..  figure:: ./_static/image/rga-capture-dock-screenshot.png
+        :align: center
+        :scale: 75 %
+
+        Screenshot of the capture dock widget
+
+
 .. note::
 
-    The capture dock widget is a convenient way to look through command values of the instrument at a glance.
-    However, its continuous update generates a lot of communication with the RGA.
-    The item values does NOT get updated or changed reliably when a scan is running in a task.
+    - The capture dock widget is a convenient way to look through command values of the instrument at a glance.
+      However, its continuous update generates a lot of communication with the instrument.
+
+    - The item values does **NOT** get updated or changed reliably while a scan is running in a task.
+
 
 Tasks
 --------
@@ -120,7 +129,7 @@ It can be run from the terminal widget or capture dock widget. A Bigger and comp
 may need hundreds of lines of code with combination of multiple
 commands and methods of multiple components of multiple instruments.
 Such a task can be implemented as a subclass of
-Task class and included as a separate item in the menu/Tasks.
+`Task`_ class and included as a separate item in the menu/Tasks.
 
 The default task configuration file, rga.taskconfig, contains the following tasks for basic RGA operations.
 
@@ -134,7 +143,8 @@ The default task configuration file, rga.taskconfig, contains the following task
     * :class:`Derived P vs. T scan <srsinst.rga.tasks.derivedpvstscantask.DerivedPvsTScanTask>`
     * :class:`Composition analysis scan <srsinst.rga.tasks.compositionanalysistask.CompositionAnalysisTask>`
 
-Select a task from the Tasks menu, adjust parameters, and press the green arrow button.
+Select a task from the Tasks menu, adjust parameters, and press the green arrow *Run* button.
 It will start the selected task.
 
 .. _srsgui_application: https://thinksrs.github.io/srsgui/application.html
+.. _task: https://thinksrs.github.io/srsgui/srsgui.task.html

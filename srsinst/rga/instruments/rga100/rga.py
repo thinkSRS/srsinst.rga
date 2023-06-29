@@ -22,7 +22,7 @@ from .components import QMF, Ionizer, Filament, CEM, Pressure, Status
 class RGA100(Instrument):
     """
     Class to control and acquire data with
-    `SRS RGA100, 200, 300 series <https://www.thinksrs.com/products/rga.html>`_.
+    `SRS RGA100, 200 and 300 series <https://www.thinksrs.com/products/rga.html>`_.
 
     A native SRS RGA has a RS232 serial port that connects with
     baud rate of 28800, one stop bit, no parity, with RTS/CTS flow control.
