@@ -49,10 +49,12 @@ It will start the GUI application.
 
 - Connect to an RGA from the Instruments menu.
 - Select a task from the Task menu.
-- Press the green arrow to run the selected task. 
+- Press the apply button, if you change parameters of the task.
+- Press the green arrow button to run the selected task. 
 
 You can write your own task or modify an existing one and run it from the application.
-Refer to [srsgui](https://thinksrs.github.io/srsgui/) documentation for details.
+Refer to [Custom tasks](https://thinksrs.github.io/srsinst.rga/custom_tasks.html) section
+in the [documentation](https://thinksrs.github.io/srsinst.rga/) for details.
 
 ## Use `srsinst.rga` as instrument driver
 * Start the Python program, or an editor of your choice to write a Python script.
