@@ -42,7 +42,7 @@ You can use ``srsinst.rga`` with `SRS RGAs <rga100_>`_ in various ways, dependin
    installation
    instrument_driver
    gui_application
-
+   custom_tasks
    srsinst.rga
 
 Indices and tables

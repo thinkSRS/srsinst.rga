@@ -1,7 +1,7 @@
 # Line that starts with '#' is a comment line
 # RGA Task list for srsgui
 
-# The name is used for the main window title
+# The name is used for the main window title and the directory name for data files
 
 Name: RGA Tasks
 
@@ -16,15 +16,17 @@ docs: Srsgui, https://thinksrs.github.io/srsgui/
 
 
 # Specify Instruments used in the task suite
+# Multiple instruments can be added to a configuration file.
 # A line that starts with 'inst' adds an instrument to be used in the following tasks.
 # An instrument is a subclass derived from Instrument class in 'srsgui' package
 # The second column is the name of the Python module or package that contains the instrument class.
 # The third column is a instrument class in the module
 # The fourth column is connection parameters.
-# If the fourth item is given, the instrument will be connected using the parameters 
-# when the config file is loaded.
+# If the fourth item is given, the instrument will be connected using the parameters,
+#     when the config file is loaded.
 
 inst: rga,      srsinst.rga,    RGA100
+
 # inst: rga2,   srsinst.rga,    RGA100,    tcpip:172.25.40.37:admin:admin:818
 # inst: rga3,   srsinst.rga,    RGA100,    serial:com3:28800:True
 
@@ -35,6 +37,8 @@ inst: rga,      srsinst.rga,    RGA100
 # The Second column is the name of the Python module that contains the task class 
 # with relative path from the Task config file.
 # The third column is the name of a Task subclass in the module.
+# The first task line is equivalent to the Python import line:
+#     from srsinst.rga.tasks.searchlan import SearchLanTask
 
 task: Search LAN for RGAs,         srsinst.rga.tasks.searchlan,                   SearchLanTask
 task: Filament Control,            srsinst.rga.tasks.filamentcontroltask,         FilamentControlTask
