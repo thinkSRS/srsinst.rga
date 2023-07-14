@@ -6,32 +6,32 @@
 """
 SRS Internet Configuration Protocol (SICP) class
 
-The RGA120 series and RGA Ethernet Adapter (REA) use the IP configuration over UDP broadcasting, SRS IP Configuration protocol (SICP). When a search
-packet is broadcast, all SICP enabled devices on the Local Area Network (LAN)
+The RGA120 series and RGA Ethernet Adapter (REA) use the IP configuration over UDP broadcasting,
+SRS IP Configuration protocol (SICP). When a search packet is broadcast,
+all SICP enabled devices on the Local Area Network (LAN)
 will respond with a packet. From those packets, you can find available devices
 on the network.
 
 If an instrument is waiting for IP configuration, you can change
 the IP settings by broadcasting another packet. For REAs, the IP setting is only
-available by power-cycle with a hardware button pressed. For RGA120s, the IP setting is available when the ECU is powered while unplugged
-from the probe.
+available by power-cycle with a hardware button pressed. For RGA120s, the IP setting is available
+when the ECU is powered while unplugged from the probe.
 
 Because anybody on the local area network can find instruments
-with SICP, You need to change the default user id and passowrd of the instrument, while you configure IP settings.
+with SICP, You need to change the default user id and password of the instrument, while you configure IP settings.
 
 Example
 ---------
     .. code-block:: python
 
-            from srsinst.rga import Sicp
-            s = Sicp()
+            from srsinst.rga import SICP
+            s = SICP()
             s.find()
             for packet in s.packet_list:
                 # packet.print_info()
                 if not packet.is_connected():
                     print(packet.convert_to_ip_format(packet.ip_address),
                           ' is available.')
-
 """
 
 import struct
@@ -224,13 +224,13 @@ class SICP(object):
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 
-    def _call(self, msg = CALL_MSG_RGA_ALL):
+    def _call(self, msg=CALL_MSG_RGA_ALL):
         self.socket.sendto(msg, (SICP.BROADCAST_ADDRESS, SICP.PORT))
 
     def _get_replies(self, timeout=3):
         old_timeout = self.socket.gettimeout()
         self.socket.settimeout(timeout)
-        self.packet_list=[]
+        self.packet_list = []
         while True:
             try:
                 data, address = self.socket.recvfrom(128)

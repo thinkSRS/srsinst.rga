@@ -2,7 +2,7 @@
 
 `srsinst.rga` provides Python instrument classes to control and acquire mass spectra from 
 [Stanford Research Systems (SRS) Residual Gas Analyzers (RGA)](https://thinksrs.com/products/rga.html).
-It also provides tasks running in GUI environment based on 
+It also provides tasks running in graphic user interface (GUI) environment based on 
 [srsgui](https://thinksrs.github.io/srsgui/).  
 For safe operation of an SRS RGA with this package, familiarize yourself with the RGA
 [manual](https://thinksrs.com/downloads/pdfs/manuals/RGAm.pdf) and

@@ -119,7 +119,7 @@ class RGA100(Instrument):
                 IP address of a instrument
             user_id: str
                 user name for login.
-            password : str
+            password: str
                 password for login.
             port : int, optional
                 TCP port number. The default is 818.
