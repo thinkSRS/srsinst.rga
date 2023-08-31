@@ -170,11 +170,25 @@ class Pressure(Component):
     """
     Total pressure measured in  ion current in 0.1 fA 
     """
+    LowLimit = 1e-4
+
+    # If you want to use a different partial pressure sensitivity from the one in the RGA,
+    # set sens_factor positive
+    sens_factor = 0.0
+
+    # If the rga is used in a UGA, set reduction_factor to convert to the inlet pressure
+    reduction_factor = 1.0
 
     def get_total_pressure_in_torr(self):
-        factor = 1e-13 / self.total_pressure_sensitivity
+        st = self.total_pressure_sensitivity
+        st = Pressure.LowLimit if st < Pressure.LowLimit else st
+
+        gain = self._parent.cem.stored_gain
+        gain = 1.0 if gain < 1.0 else gain
+
+        factor = 1e-13 / st
         if self._parent.cem.voltage > 10:
-            factor /= self._parent.cem.stored_gain
+            factor /= gain
         return self.total_pressure * factor
 
     def get_partial_pressure_sensitivity_in_torr(self):
@@ -182,9 +196,21 @@ class Pressure(Component):
         Sensitivity factor is multiplied to a raw ion current value (in 1e-16 A unit)
         to calculate the partial pressure in Torr
         """
-        factor = 1e-13 / self.partial_pressure_sensitivity
+        if self.sens_factor > 0.0:
+            sp = self.sens_factor
+        else:
+            sp = self.partial_pressure_sensitivity
+            sp = Pressure.LowLimit if sp < Pressure.LowLimit else sp
+
+        if self.reduction_factor < 1e-12:
+            self.reduction_factor = 1e-12
+
+        gain = self._parent.cem.stored_gain
+        gain = 1.0 if gain < 1.0 else gain
+
+        factor = 1e-13 / sp / self.reduction_factor
         if self._parent.cem.voltage > 10:
-            factor /= self._parent.cem.stored_gain
+            factor /= gain
         return factor
 
 
