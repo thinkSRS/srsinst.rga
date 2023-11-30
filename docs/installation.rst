@@ -46,7 +46,7 @@ Install ``srsinst.rga`` using pip_ from the command prompt as following.
 
 .. code-block::
 
-    python -m pip install srsgui
+    python -m pip install srsinst.rga
 
 It will install ``srsinst.rga`` along with pyserial_, numpy_, and scipy_ main packages.
 Sometimes, the newest Python does not have compatible versions of the packages available yet.
@@ -62,14 +62,24 @@ To run ``srsinst.rga`` as a GUI application, install it with [full] option using
 
 .. code-block::
 
-    python -m pip install srsgui[full]
+    python -m pip install srsinst.rga[full]
 
 It will install ``srsinst.rga`` package along with
 the 2 additional main packages (matplotlib_ and pyside6_) and their dependencies.
 After installation completed, you can start ``srsinst.rga`` as an GUI application.
 
-Starting srsgui application
-----------------------------
+Upgrading ``srsinst.rga``
+--------------------------
+
+to upgrade ``srsinst.rga`` to the latest version available, run pip_ with the *--upgrade* argument:
+
+.. code-block::
+
+    python -m pip install --upgrade  srsinst.rga
+
+
+Starting srsinst.rga GUI application
+---------------------------------
 
 After ``srsinst.rga`` is installed, you can start ``srsinst.rga`` application from the command prompt.
 

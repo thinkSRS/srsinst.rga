@@ -417,7 +417,7 @@ It will bring up a plot showing an analog scan spectrum.
         :width: 500pt
 
 
-As a summary, a script is put together to get an analog scan plot from the beginning.
+As a summary, the following script is put together to get an analog scan plot from the beginning.
 
 .. code-block:: python
 
@@ -429,7 +429,7 @@ As a summary, a script is put together to get an analog scan plot from the begin
     rga1.filament.turn_on()
     rga1.cem.turn_off()
     rga1.scan.set_parameters(1, 50, 3, 20)  # (initial mass, final mass, scan speed, resolution)
-    mass_axis = rga1.scan.get_mass_axis(True)
+    mass_axis = rga1.scan.get_mass_axis(True)  # True for analog scan, False for histogram scan
     spectrum = rga1.scan.get_analog_scan()
     spectrum_in_torr = rga1.scan.get_partial_pressure_corrected_spectrum(spectrum)
     rga1.disconnect())

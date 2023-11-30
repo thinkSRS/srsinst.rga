@@ -37,7 +37,7 @@ class TimePlot:
 
         plot_options: list of dict
             each element of the list with the matching element in data_names
-            will be passed to Matplotlib Axes.plot as **kwarg, if exists.
+            will be passed to Matplotlib Axes.plot as \*\*kwarg, if exists.
     """
 
     def __init__(self, parent: Task, ax: Axes, plot_name='', data_names=('Y',), save_to_file=True,

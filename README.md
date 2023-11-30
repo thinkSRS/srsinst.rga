@@ -34,6 +34,9 @@ Installation will be faster, because it does NOT install GUI related packages.
 
     python -m pip install srsinst.rga
 
+To upgrade `srsinst.rga` to the latest version available, run `pip` with *--upgrade* argument.
+
+  python -m pip install --upgrade srsinst.rga
 
 ## Run `srsinst.rga` as GUI application
 If the Python Scripts directory is in PATH environment variable,
