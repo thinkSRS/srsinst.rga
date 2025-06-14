@@ -1,7 +1,7 @@
-##! 
-##! Copyright(c) 2022, 2023 Stanford Research Systems, All rights reserved
+##!
+##! Copyright(c) 2022, 2023, 2025 Stanford Research Systems, All rights reserved
 ##! Subject to the MIT License
-##! 
+##!
 
 import math
 import time
@@ -12,32 +12,34 @@ from scipy.signal import ricker, find_peaks, find_peaks_cwt, peak_widths, butter
 from srsgui import Task
 from srsgui import FloatInput, IntegerInput, StringInput
 
-from srsinst.rga120.tasks.peakanalysis import smooth
-from srsinst.rga120.tasks.fitting.arplsbaseline import baseline_arPLS
-from instruments.get_instruments import get_rga
+from srsinst.rga.plots.analysis import calculate_baseline
+
+# get_rga is imported from the path relative to the .taskconfig file
+from instruments import get_rga
 
 
 class PeakTuningTask(Task):
-    """<b>Change peak tuning parameters Automatically while scanning.</b><br> \
-Enable auto tuning feature of RGA120 and display peak tuning results.
+    """<b>Change peak tuning parameters (RF slope, RF offset, DC slope, DC offset, and Peak threshold)
+manually while scanning.</b><br>
+Change parameters to get peak poisiton errors horizontally aligned around 0,
+peak widths horizontally aligned around 0.6, and adjust peak threshold to control number of peaks selected. <br>
+Before start, select the maximum mass you want to see in the plot.
     """
 
     RFSlope = 'RF slope'
-    RFIntercept = 'RF intercept'
+    RFOffset = 'RF offset'
     DCSlope = 'DC slope'
-    DCIntercept = 'DC intercept'
+    DCOffset = 'DC offset'
     PeakThreshold = 'Peak threshold'
-    MassList = 'Masses used for tuning'
-    PeakWidth = 'Peak width'
+    MassLimit = 'Mass upper limit'
 
     # input_parameters values can be changed interactively from GUI
     input_parameters = {
-        MassList: StringInput('14, 28, 32, 44'),
-        PeakWidth: FloatInput(0.6, " AMU", 0.3, 1.2, .1),
-        RFSlope: FloatInput(1000, "", 600, 1600, .01),
-        RFIntercept: FloatInput(-0.5, " V", -86, 86, 0.001),
+        MassLimit: IntegerInput(50, " AMU", 20, 200, 1),
+        RFSlope: FloatInput(1000.0, "", 600, 1700, .01),
+        RFOffset: FloatInput(-0.5, "", -86, 86, 0.001),
         DCSlope: FloatInput(0.0951, "", -0.85, 0.85, .0001),
-        DCIntercept: FloatInput(125, " V", 0, 255, 1.0),
+        DCOffset: IntegerInput(125, "", 0, 255, 1),
         PeakThreshold: FloatInput(1e4, "", 10, 1000000, 1),
     }
 
@@ -51,31 +53,20 @@ Enable auto tuning feature of RGA120 and display peak tuning results.
         self.data_dict['prev_x'] = []
         self.data_dict['prev_y'] = []
 
-        self.peak_width_value = self.get_input_parameter(self.PeakWidth)
-        self.mass_list_value = self.get_input_parameter(self.MassList)
-        self.mass_list = [int(i) for i in self.mass_list_value.split(',')]
-        self.mass_list.sort()
+        self.mass_limit_value = self.get_input_parameter(self.MassLimit)
 
         self.rga = get_rga(self)
         print(self.rga.comm.query_text('id?'))  # clear buffer
         self.id_string = self.rga.comm.query_text('id?')
 
-        start = self.mass_list[0] - 6
-        stop = self.mass_list[-1] + 6
-        self.start_value = 1  # self.rga.comm.query_int('mi?')
-        self.stop_value = stop if stop < 210 else 210  # self.rga.comm.query_int('mf?')
-        self.speed_value = 3  # self.rga.comm.query_int('nf?')
-        self.step_value = 20  # self.rga.comm.query_int('sa?')
+        self.start_value = 1
+        self.stop_value = self.mass_limit_value
+        self.speed_value = 3
+        self.step_value = 20
         self.rga.scan.set_parameters(self.start_value,
                                      self.stop_value,
                                      self.speed_value,
                                      self.step_value)
-        """
-        self.rga.qmf.tune.width = self.peak_width_value
-        self.rga.qmf.tune.set_table(self.mass_list)
-        self.rga.qmf.tune.auto_enable = True
-        self.logger.info('Mass used for tuning: {}'.format(self.mass_list))
-        """
 
         self.logger.info('Start: {} Stop: {} Speed: {} Step: {}'.format(
             self.start_value, self.stop_value, self.speed_value, self.step_value))
@@ -88,25 +79,29 @@ Enable auto tuning feature of RGA120 and display peak tuning results.
         self.rga.scan.set_callbacks(self.update_callback, None, self.scan_finished_callback)
         self.rga.scan.set_data_callback_period(0.5)
 
-        """
-        # get current tuning parameters and update input_parameters
-        self.dds_frequency_value = self.rga.query_float('DDS:FREQ?')
-        self.rf_slope_value = self.rga.qmf.rf.slope
-        self.rf_intercept_value = self.rga.qmf.rf.offset
-        self.dc_slope_value = self.rga.qmf.dc.slope
-        self.dc_intercept_value = self.rga.qmf.dc.offset
 
-        
+        # get current tuning parameters and update input_parameters
+        self.rf_slope_value = self.rga.qmf.rf.slope
+        self.rf_offset_value = self.rga.qmf.rf.offset
+        self.dc_slope_value = self.rga.qmf.dc.slope
+        self.dc_offset_value = self.rga.qmf.dc.offset
+
         self.set_input_parameter(self.RFSlope, self.rf_slope_value)
-        self.set_input_parameter(self.RFIntercept, self.rf_intercept_value)
+        self.set_input_parameter(self.RFOffset, self.rf_offset_value)
         self.set_input_parameter(self.DCSlope, self.dc_slope_value)
-        self.set_input_parameter(self.DCIntercept, self.dc_intercept_value)
+        self.set_input_parameter(self.DCOffset, self.dc_offset_value)
         self.notify_parameter_changed()
 
-        self.logger.info('RF Frequency: {} RF slope: {} RF intercept: {} DC slope: {} DC intercept {}'.format(
-            self.dds_frequency_value, self.rf_slope_value, self.rf_intercept_value,
-            self.dc_slope_value, self.dc_intercept_value))
-        """
+        self.logger.info('RF slope: {} RF offset: {} DC slope: {} DC offset {}'.format(
+            self.rf_slope_value, self.rf_offset_value,
+            self.dc_slope_value, self.dc_offset_value))
+
+        self.add_details('Initial cal values', '\n1')
+        self.add_details(f'{self.rf_slope_value:.1f}', 'RF slope')
+        self.add_details(f'{self.dc_slope_value}', 'DC slope')
+        self.add_details(f'{self.rf_offset_value:.4f}', 'RF offset')
+        self.add_details(f'{self.dc_offset_value}', 'DC offset')
+
 
     def init_plot(self):
         self.ax = self.figure.subplots(nrows=2, ncols=2, sharex=True,
@@ -137,38 +132,41 @@ Enable auto tuning feature of RGA120 and display peak tuning results.
             x = self.data_dict['x']
             y = self.data_dict['y']
             number_of_iteration = 1000  # self.reps_value
-            print('Mass list: {}'.format(self.mass_list))
             self.mass_axis = self.rga.scan.get_mass_axis()
 
             #self.data_dict['x'] = self.mass_axis
             # self.save_result(','.join(map(str, self.data_dict['x'])))
 
             for i in range(number_of_iteration):
+                if not self.is_running():
+                    if i > 0:
+                        self.set_task_passed(True)
+                    break
+
                 self.rga.scan.get_analog_scan()
                 self.logger.info('scan {} finished'.format(i))
 
-                # update parameters
-                self.set_input_parameter(self.RFSlope, self.rga.qmf.rf.slope)
-                self.set_input_parameter(self.RFIntercept, self.rga.qmf.rf.offset)
-                self.set_input_parameter(self.DCSlope, self.rga.qmf.dc.slope)
-                self.set_input_parameter(self.DCIntercept, self.rga.qmf.dc.offset)
-                self.notify_parameter_changed()
-                self.delay(0.0)
+                # Get value to use for test from input_parameters
+                self.rf_slope_value  = self.input_parameters[self.RFSlope].value
+                self.rf_offset_value  = self.input_parameters[self.RFOffset].value
+                self.dc_slope_value  = self.input_parameters[self.DCSlope].value
+                self.dc_offset_value  = self.input_parameters[self.DCOffset].value
 
-            self.add_details(f'{self.rf_slope_value}', 'RF slope')
+                self.rga.qmf.rf.slope = self.rf_slope_value
+                self.rga.qmf.rf.offset = self.rf_offset_value
+                self.rga.qmf.dc.slope = self.dc_slope_value
+                self.rga.qmf.dc.offset = self.dc_offset_value
+
+            self.add_details('Final cal values', '\n2')
+            self.add_details(f'{self.rf_slope_value:.1f}', 'RF slope')
             self.add_details(f'{self.dc_slope_value}', 'DC slope')
-            self.add_details(f'{self.rf_intercept_value}', 'RF intercept')
-            self.add_details(f'{self.dc_intercept_value}', 'DC intercept')
-            self.add_details(f'{self.dds_frequency_value / 1e6 :.3f} MHz', 'DDS frequency')
-
-            self.add_details(f'Slopes: RF={self.rf_slope_value:.4f}, DC={self.dc_slope_value:.4f}')
+            self.add_details(f'{self.rf_offset_value:.4f}', 'RF offset')
+            self.add_details(f'{self.dc_offset_value}', 'DC offset')
 
             table_name = 'Mass spectra'
             self.create_table(table_name, 'Mass(AMU)', 'Intensity (0.1 fA)')
-            for p, x in enumerate(self.mass_axis):
-                self.add_data_to_table(table_name, round(x, 2), self.data_dict['prev_y'][p])
-
-            self.set_task_passed(True)
+            for x, y in zip(self.mass_axis, self.data_dict['prev_y']):
+                self.add_data_to_table(table_name, round(x, 2), y)
 
         except Exception as e:
             self.logger.error(e)
@@ -193,9 +191,9 @@ Enable auto tuning feature of RGA120 and display peak tuning results.
             mi = x[0]
             sa = round(1.0 / (x[1] - x[0]))
 
-            signal_offset = baseline_arPLS(yr, lam=1e8)
+            signal_offset = calculate_baseline(yr, lam=1e8)
 
-            y = smooth(x, yr - signal_offset)
+            y = yr - signal_offset
 
             widths = np.arange(0.8, 8, 0.2)
             peaks_cwt_raw = find_peaks_cwt(y, widths, wavelet=ricker, min_snr=3)

@@ -44,6 +44,7 @@ task: Search LAN for RGAs,         srsinst.rga.tasks.searchlan,                 
 task: Filament Control,            srsinst.rga.tasks.filamentcontroltask,         FilamentControlTask
 task: CEM Control,                 srsinst.rga.tasks.cemcontroltask,              CEMControlTask
 task: CEM Gain Tuning,             srsinst.rga.tasks.cemgaintask,                 CEMGainTask
+task: Peak tuning,                 srsinst.rga.tasks.peaktuningtask,              PeakTuningTask
 task: Analog Scan,                 srsinst.rga.tasks.analogscantask,              AnalogScanTask
 task: Histogram Scan,              srsinst.rga.tasks.histogramscantask,           HistogramScanTask
 task: Pressure vs. Time Scan,      srsinst.rga.tasks.pvstscantask,                PvsTScanTask

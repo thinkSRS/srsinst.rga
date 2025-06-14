@@ -15,6 +15,6 @@ except (ImportError, ModuleNotFoundError):
     # Without matplotlib package installed, importing plot classes will fail.
     pass
 
-__version__ = "0.3.5"  # Global version number
+__version__ = "0.3.6"  # Global version number
 
 
