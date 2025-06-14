@@ -79,7 +79,7 @@ to upgrade ``srsinst.rga`` to the latest version available, run pip_ with the *-
 
 
 Starting srsinst.rga GUI application
----------------------------------
+--------------------------------------
 
 After ``srsinst.rga`` is installed, you can start ``srsinst.rga`` application from the command prompt.
 

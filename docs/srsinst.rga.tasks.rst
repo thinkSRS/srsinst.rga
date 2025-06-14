@@ -37,6 +37,15 @@ srsinst.rga.tasks.filamentcontroltask module
    :show-inheritance:
    :no-inherited-members:
 
+srsinst.rga.tasks.peaktuningtask module
+--------------------------------------------
+
+.. automodule:: srsinst.rga.tasks.peaktuningtask
+   :members:
+   :no-undoc-members:
+   :show-inheritance:
+   :no-inherited-members:
+
 srsinst.rga.tasks.analogscantask module
 ---------------------------------------
 
