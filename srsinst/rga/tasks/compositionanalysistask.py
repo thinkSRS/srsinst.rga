@@ -1,7 +1,7 @@
-##! 
-##! Copyright(c) 2022, 2023 Stanford Research Systems, All rights reserved
+##!
+##! Copyright(c) 2022-2025 Stanford Research Systems, All rights reserved
 ##! Subject to the MIT License
-##! 
+##!
 
 from srsgui import Task
 from srsgui.task.inputs import StringInput, IntegerInput, InstrumentInput
@@ -43,7 +43,7 @@ from a gas library file.
     }
 
     additional_figure_names = [CompPlot, DerivedPvsTPlot]
-    
+
     def setup(self):
         # Get values to use for task  from input_parameters in GUI
         self.params = self.get_all_input_parameters()
@@ -57,7 +57,7 @@ from a gas library file.
         self.init_scan()
 
         self.lib = self.read_gas_library()
-        self.mat = self.build_coeff_matrix(self.lib, self.params[self.StartMass], 
+        self.mat = self.build_coeff_matrix(self.lib, self.params[self.StartMass],
                                            self.params[self.StopMass], self.gas_list)
 
         # Set up an derived P vs T plot
@@ -135,40 +135,40 @@ from a gas library file.
                 if not self.rga.is_connected():
                     self.logger.error('"{}" is disconnected'.format(self.params[self.InstrumentName]))
                     break
+            else:
+                # manually update self.line_comp
+                self.line_comp.set_xdata(self.plot.data['prev_x'])
+                corrected_y = self.plot.data['prev_y'] - self.plot.data['prev_baseline']
+                self.line_comp.set_ydata(corrected_y)
+                if self.init_plot:
+                    self.ax_comp.set_ylim(self.ax.get_ylim())
+                    self.init_plot = False
+                ys = np.array([get_peak_from_analog_scan(self.plot.data['prev_x'],
+                                                         corrected_y, mass)
+                              for mass in self.bar_x])
 
-            # manually update self.line_comp
-            self.line_comp.set_xdata(self.plot.data['prev_x'])
-            corrected_y = self.plot.data['prev_y'] - self.plot.data['prev_baseline']
-            self.line_comp.set_ydata(corrected_y)
-            if self.init_plot:
-                self.ax_comp.set_ylim(self.ax.get_ylim())
-                self.init_plot = False
-            ys = np.array([get_peak_from_analog_scan(self.plot.data['prev_x'],
-                                                     corrected_y, mass)
-                          for mass in self.bar_x])
+                # Non-negative least square fit
+                c, res = nnls(self.mat, ys)
+                # c, res, _, _ = np.linalg.lstsq(self.mat, ys, rcond=None)
 
-            # Non-negative least square fit
-            c, res = nnls(self.mat, ys)
-            # c, res, _, _ = np.linalg.lstsq(self.mat, ys, rcond=None)
+                self.display_result('', True)
+                for n, pp in zip(self.gas_list, c):
+                    self.display_result(f'{n}: {pp:.2e} torr')
 
-            self.display_result('', True)
-            for n, pp in zip(self.gas_list, c): 
-                self.display_result(f'{n}: {pp:.2e} torr')
+                self.display_result(f'Residual: {res:.2e}')  # for nnls
+                # self.display_result(f'Residual: {np.sqrt(res)[0]:.3e}')  # for lstsq
 
-            self.display_result(f'Residual: {res:.2e}')  # for nnls
-            # self.display_result(f'Residual: {np.sqrt(res)[0]:.3e}')  # for lstsq
+                self.pvst_plot.add_data(c, True)
 
-            self.pvst_plot.add_data(c, True)
-
-            # Update stacked bar graph
-            bottom = np.zeros_like(self.bar_x, dtype=np.float64)
-            for i, gas in enumerate(self.gas_list):
-                ys = self.mat[:, i] * c[i]
-                for k, y in enumerate(ys):
-                    self.rect_dict[gas][k].set_height(y)
-                    self.rect_dict[gas][k].set_y(bottom[k])
-                bottom += ys
-            self.request_figure_update(self.ax_comp.figure)
+                # Update stacked bar graph
+                bottom = np.zeros_like(self.bar_x, dtype=np.float64)
+                for i, gas in enumerate(self.gas_list):
+                    ys = self.mat[:, i] * c[i]
+                    for k, y in enumerate(ys):
+                        self.rect_dict[gas][k].set_height(y)
+                        self.rect_dict[gas][k].set_y(bottom[k])
+                    bottom += ys
+                self.request_figure_update(self.ax_comp.figure)
 
     def cleanup(self):
         self.logger.info('Task finished')
@@ -207,10 +207,10 @@ from a gas library file.
         self.logger.info('Number of gas read from {}: {}'.format(file_name, count//3))
         return d
 
-    def build_coeff_matrix(self, gas_library, start_mass=1, stop_mass=50, 
+    def build_coeff_matrix(self, gas_library, start_mass=1, stop_mass=50,
                            gas_name_list=('Water', 'Nitrogen', 'Oxygen', 'Carbon dioxide')):
         """
-        Build a least square fit coefficient matrix based on mass range  and 
+        Build a least square fit coefficient matrix based on mass range  and
         reference gas histogram spectra.
         """
         mat = np.array([np.zeros(stop_mass - start_mass + 1)])
@@ -225,4 +225,3 @@ from a gas library file.
             mat = np.append(mat, gas_vector, axis=0)
         A = mat[1:].T
         return A
- 
