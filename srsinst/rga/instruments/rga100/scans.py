@@ -1,5 +1,5 @@
 ##! 
-##! Copyright(c) 2022, 2023 Stanford Research Systems, All rights reserved
+##! Copyright(c) 2022-2025 Stanford Research Systems, All rights reserved
 ##! Subject to the MIT License
 ##! 
 
@@ -247,7 +247,7 @@ class Scans(Component):
             self._scan_finished_callback()
         return self.spectrum
 
-    def get_multiple_mass_scan(self, *mass_list):
+    def get_multiple_mass_scan(self, mass_list):
         """
         Run a multi mass scan
 
