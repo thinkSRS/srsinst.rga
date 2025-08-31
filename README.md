@@ -166,7 +166,7 @@ in the [documentation](https://thinksrs.github.io/srsinst.rga/) for details.
 
 * Measure a single mass ion current of nitrogen at 28 amu
 
-        intensity = rga1.scan.get_single_scan(28)
+        intensity = rga1.scan.get_single_mass_scan(28)
 
 * Save the spectrum to a file.
 
