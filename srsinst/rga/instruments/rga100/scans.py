@@ -303,8 +303,8 @@ class Scans(Component):
         if not fit:
             return p
         arg = m[0] + np.argmax(y[m])
-        x1 = x[arg - 2:arg + 4]
-        y1 = y[arg - 2:arg + 4]
+        x1 = x[arg - 3:arg + 4]
+        y1 = y[arg - 3:arg + 4]
         c = np.polyfit(x1, y1, 2)  # fit the points around the max
         roots = np.roots(c)
         pp = (roots[0] + roots[1]) / 2.0  # peak position

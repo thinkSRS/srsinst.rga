@@ -7,7 +7,7 @@ import math
 import time
 import copy
 import numpy as np
-from scipy.signal import ricker, find_peaks, find_peaks_cwt, peak_widths, butter, filtfilt
+from scipy.signal import find_peaks, find_peaks_cwt, peak_widths, butter, filtfilt
 
 from srsgui import Task
 from srsgui import FloatInput, IntegerInput, StringInput
@@ -196,7 +196,7 @@ Before start, select the maximum mass you want to see in the plot.
             y = yr - signal_offset
 
             widths = np.arange(0.8, 8, 0.2)
-            peaks_cwt_raw = find_peaks_cwt(y, widths, wavelet=ricker, min_snr=3)
+            peaks_cwt_raw = find_peaks_cwt(y, widths, min_snr=3)
 
             peaks_cwt = np.array([], dtype=np.int32)
             for i in peaks_cwt_raw:
